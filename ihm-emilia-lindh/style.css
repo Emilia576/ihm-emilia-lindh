@@ -1,0 +1,410 @@
+/* 1 · Box-modellen: bredden gäller hela lådan */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* 2 · Varumärket som variabler */
+:root {
+    --text: #1f2430;
+    --yta: #faf6f0;
+    --yta-2: #f2ebe1;
+    --kant: #ded5c6;
+    --primar: #1d4e89;
+    --accent: #b0805a;
+    --knapptext: #ffffff;
+    --rubrik: #5c3d2e;
+    --luft: 1rem;
+    --radie: 12px;
+}
+
+/* 3 · Grundstil */
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--yta);
+}
+
+h1,
+h2,
+h3 {
+    line-height: 1.2;
+    color: var(--rubrik);
+}
+
+h1 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+h2 {
+    font-size: 1.75rem;
+    margin-top: 0;
+}
+
+h3 {
+    font-size: 1.25rem;
+}
+
+p {
+    max-width: 65ch;
+}
+
+a {
+    color: var(--primar);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* 4 · Sidhuvud och meny */
+.sidhuvud {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--luft);
+    padding: calc(var(--luft) * 1.5);
+    background: var(--yta-2);
+}
+
+.roll {
+    margin: 0;
+}
+
+nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--luft);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    color: var(--rubrik);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* 5 · Innehållsytan */
+main {
+    max-width: 70rem;
+    margin: 0 auto;
+    padding: 0 calc(var(--luft) * 1.5);
+}
+
+section {
+    padding: calc(var(--luft) * 3) 0;
+}
+
+/* Hero-sektion */
+.hero {
+    padding: calc(var(--luft) * 4) 0;
+    text-align: left;
+}
+
+.hero-innehall {
+    max-width: 800px;
+}
+
+.hero-tagg {
+    display: inline-block;
+    background: var(--yta-2);
+    color: var(--accent);
+    border: 1px solid var(--kant);
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 0.35rem 0.85rem;
+    border-radius: 20px;
+    margin-bottom: var(--luft);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.hero h2 {
+    font-size: 2.25rem;
+    margin-top: 0;
+    margin-bottom: calc(var(--luft) * 1.25);
+    line-height: 1.2;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: var(--text);
+    margin-bottom: calc(var(--luft) * 2);
+}
+
+.hero-knappar {
+    display: flex;
+    gap: var(--luft);
+    flex-wrap: wrap;
+}
+
+/* Rörliga tunna linjer runt knapparna */
+.hero-knappar .knapp {
+    position: relative;
+    background: transparent;
+    color: var(--knapptext);
+    border: none;
+    overflow: hidden;
+    isolation: isolate;
+    padding: 0.75rem 1.35rem;
+    z-index: 1;
+}
+
+.hero-knappar .knapp:hover {
+    background: transparent;
+    color: var(--knapptext);
+}
+
+.hero-knappar .knapp::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 320%;
+    height: 320%;
+    transform: translate(-50%, -50%);
+    animation: roteraLinje 4s linear infinite;
+    z-index: -2;
+    background: conic-gradient(
+        from 0deg,
+        rgba(222, 213, 198, 0.4) 0deg,
+        rgba(222, 213, 198, 0.4) 60deg,
+        #ffffff 85deg,
+        #5c3d2e 105deg,
+        rgba(222, 213, 198, 0.4) 130deg,
+        rgba(222, 213, 198, 0.4) 240deg,
+        #ffffff 265deg,
+        #5c3d2e 285deg,
+        rgba(222, 213, 198, 0.4) 310deg
+    );
+}
+
+/* Skapa en fin fasförskjutning så att linjerna inte roterar helt identiskt */
+.hero-knappar .knapp:nth-child(2)::before {
+    animation-delay: -2s;
+}
+
+.hero-knappar .knapp::after {
+    content: "";
+    position: absolute;
+    inset: 1.5px;
+    background: var(--accent);
+    border-radius: calc(var(--radie) - 1.5px);
+    z-index: -1;
+    transition: background 0.2s ease;
+}
+
+.hero-knappar .knapp:hover::after {
+    background: #9c6e49;
+}
+
+/* Animation som rör linjen runt knappen */
+@keyframes roteraLinje {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-knappar .knapp::before {
+        animation: none;
+    }
+}
+
+/* Anpassning för större skärmar */
+@media (min-width: 48rem) {
+    .hero {
+        padding: calc(var(--luft) * 6) 0;
+    }
+
+    .hero h2 {
+        font-size: 3rem;
+    }
+}
+
+
+/* Om mig - Bild i nedre högra hörnet */
+.om-innehall {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: calc(var(--luft) * 2);
+    flex-wrap: wrap;
+}
+
+.om-innehall .om-text {
+    flex: 1;
+    min-width: 280px;
+}
+
+.om-innehall img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: var(--radie);
+    margin-left: auto;
+}
+
+/* 6 · Kort i ett rutnät */
+.rutnat {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: calc(var(--luft) * 1.5);
+    list-style: none;
+    padding: 0;
+}
+
+.kort {
+    background: var(--yta-2);
+    padding: calc(var(--luft) * 1.5);
+    border: 1px solid var(--kant);
+    border-radius: var(--radie);
+}
+
+.kort h3 {
+    margin-top: 0;
+}
+
+.kort img {
+    border-radius: calc(var(--radie) / 2);
+    margin-bottom: var(--luft);
+}
+
+/* 7 · Knappar och fokus */
+button,
+.knapp {
+    font: inherit;
+    display: inline-block;
+    padding: 0.75rem 1.25rem;
+    color: var(--knapptext);
+    background: var(--accent);
+    border: none;
+    border-radius: var(--radie);
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+button:hover,
+.knapp:hover {
+    background: #9c6e49;
+    color: var(--knapptext);
+    text-decoration: none;
+}
+
+#tema {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+    font-weight: 600;
+    border-radius: calc(var(--radie) / 2);
+}
+
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+}
+
+footer {
+    padding: calc(var(--luft) * 2);
+    text-align: center;
+    background: var(--yta-2);
+}
+
+footer p {
+    margin: 0 auto;
+}
+
+/* 8 · Större skärmar */
+@media (min-width: 48rem) {
+    .sidhuvud {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: calc(var(--luft) * 1.5) calc(var(--luft) * 3);
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+}
+
+/* 9 · Mörkt läge: nya färger när body har klassen morkt */
+body.morkt {
+    --text: #e8e6e1;
+    --yta: #14171f;
+    --yta-2: #1f2430;
+    --kant: #343a48;
+    --primar: #8ab4f8;
+    --rubrik: #d7b9a5;
+    --accent: #a57853;
+    --knapptext: #ffffff;
+}
+
+body.morkt .hero-knappar .knapp::before {
+    background: conic-gradient(
+        from 0deg,
+        rgba(52, 58, 72, 0.5) 0deg,
+        rgba(52, 58, 72, 0.5) 60deg,
+        #ffffff 85deg,
+        var(--rubrik) 105deg,
+        rgba(52, 58, 72, 0.5) 130deg,
+        rgba(52, 58, 72, 0.5) 240deg,
+        #ffffff 265deg,
+        var(--rubrik) 285deg,
+        rgba(52, 58, 72, 0.5) 310deg
+    );
+}
+
+/* 10 · Kompetenser */
+.kompetenser-lista {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+    list-style: none;
+    padding: 0;
+    margin: var(--luft) 0;
+    max-width: 550px;
+}
+
+.kompetenser-lista li {
+    background: var(--yta-2);
+    color: var(--text);
+    border: 1px solid var(--kant);
+    padding: 0.5rem 0.75rem;
+    border-radius: calc(var(--radie) / 2);
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+}
+
+@media (max-width: 650px) {
+    .kompetenser-lista {
+        grid-template-columns: 1fr;
+    }
+}
