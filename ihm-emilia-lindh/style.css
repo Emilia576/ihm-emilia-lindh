@@ -760,7 +760,7 @@ body.morkt .sidhuvud {
     padding: 2rem clamp(1.25rem, 4vw, 4rem) 3rem;
     color: #35141d;
     text-align: left;
-    background: #f3e8dc;
+    background: var(--yta);
 }
 
 .hero::before,
@@ -1579,11 +1579,8 @@ main > section:not(.hero) {
 }
 
 body:not(.morkt) .hero {
-    background-color: #f3e8dc;
-    background-image: linear-gradient(rgba(243, 232, 220, 0.62), rgba(243, 232, 220, 0.62)), url("img/emilia-professionell.png");
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-color: var(--yta);
+    background-image: none;
 }
 
 .hero .hero-tagg {
@@ -1604,10 +1601,8 @@ body:not(.morkt) .hero {
 }
 
 body.morkt .hero {
-    background-image: linear-gradient(rgba(50, 24, 39, 0.62), rgba(50, 24, 39, 0.62)), url("img/emilia-professionell.png");
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-color: #321827;
+    background-image: none;
 }
 
 body.morkt .hero .hero-tagg {
