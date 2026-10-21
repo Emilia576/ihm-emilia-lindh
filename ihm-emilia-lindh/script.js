@@ -11,3 +11,20 @@ function bytTema() {
 }
 
 temaknapp.addEventListener("click", bytTema);
+
+if ("scrollRestoration" in history) {
+    history.scrollRestoration = "manual";
+}
+
+window.addEventListener("load", () => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+});
+
+document.querySelectorAll(".kompetens-toggle").forEach((knapp) => {
+    knapp.addEventListener("click", () => {
+        const rad = knapp.closest("li");
+        const oppen = rad.classList.toggle("is-open");
+        knapp.setAttribute("aria-expanded", String(oppen));
+        knapp.querySelector("span").textContent = oppen ? "−" : "+";
+    });
+});
