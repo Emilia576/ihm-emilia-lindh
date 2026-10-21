@@ -101,45 +101,6 @@ img {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--kant);
-    overflow: visible;
-    padding-bottom: 5.7rem;
-    margin-bottom: 1cm;
-    box-shadow: 0 1cm 0 #f3e8dc;
-}
-
-.header-remmsa {
-    position: absolute;
-    right: 0;
-    bottom: -1cm;
-    left: 0;
-    height: 1.5rem;
-    overflow: hidden;
-    color: #f3e8dc;
-    background: #874057;
-    font-size: 0.65rem;
-    letter-spacing: 0.15em;
-    line-height: 1.5rem;
-    text-transform: uppercase;
-    white-space: nowrap;
-}
-
-.header-remmsa span {
-    display: inline-block;
-    padding-left: 0;
-    animation: remsa 44s linear infinite;
-}
-
-.header-remmsa span::first-letter {
-    color: #ffffff;
-}
-
-@keyframes remsa {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .header-remmsa span { animation: none; }
 }
 
 .sidhuvud h1,
@@ -1235,11 +1196,6 @@ body {
         font-size: 0.78rem;
     }
 
-    .header-remmsa {
-        height: 1.35rem;
-        font-size: 0.58rem;
-        line-height: 1.35rem;
-    }
 
     .hero {
         min-height: 43rem;
@@ -1402,10 +1358,6 @@ body.morkt .sidhuvud nav a {
     color: #f3e8dc;
 }
 
-body.morkt .header-remmsa {
-    color: #fffaf4;
-    background: #874057;
-}
 
 body.morkt .hero {
     color: #f3e8dc;
