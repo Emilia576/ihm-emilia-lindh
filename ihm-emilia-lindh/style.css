@@ -15,7 +15,7 @@
 /* 2 · Varumärket som variabler */
 :root {
     --text: #1f2430;
-    --yta: #faf6f0;
+    --yta: #f3e8dc;
     --yta-2: #f2ebe1;
     --kant: #ded5c6;
     --primar: #1d4e89;
@@ -760,7 +760,7 @@ body.morkt .sidhuvud {
     padding: 2rem clamp(1.25rem, 4vw, 4rem) 3rem;
     color: #35141d;
     text-align: left;
-    background: var(--yta);
+    background: #f3e8dc;
 }
 
 .hero::before,
@@ -996,7 +996,7 @@ main > section:not(.hero) h2::after {
 #om,
 #tjanster,
 #kompetenser {
-    background: #faf6f0;
+    background: #f3e8dc;
 }
 
 footer {
@@ -1440,7 +1440,7 @@ body.morkt footer {
 }
 
 body:not(.morkt),
-body:not(.morkt) #om,
+body:not(.morkt) .hero,
 body:not(.morkt) #tjanster,
 body:not(.morkt) #kompetenser,
 body:not(.morkt) footer {
@@ -1579,7 +1579,7 @@ main > section:not(.hero) {
 }
 
 body:not(.morkt) .hero {
-    background-color: var(--yta);
+    background-color: #f3e8dc;
     background-image: none;
 }
 
