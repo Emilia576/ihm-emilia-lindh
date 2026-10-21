@@ -947,7 +947,7 @@ body.morkt .sidhuvud {
     border-radius: 0;
     background-color: #3a0d1b;
     background-image: url("img/emilia-professionell.png");
-    background-position: center;
+    background-position: center top;
     background-size: cover;
 }
 
@@ -1581,7 +1581,7 @@ main > section:not(.hero) {
 body:not(.morkt) .hero {
     background-color: #f3e8dc;
     background-image: linear-gradient(rgba(243, 232, 220, 0.62), rgba(243, 232, 220, 0.62)), url("img/emilia-professionell.png");
-    background-position: center;
+    background-position: center top;
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -1605,7 +1605,7 @@ body:not(.morkt) .hero {
 
 body.morkt .hero {
     background-image: linear-gradient(rgba(50, 24, 39, 0.62), rgba(50, 24, 39, 0.62)), url("img/emilia-professionell.png");
-    background-position: center;
+    background-position: center top;
     background-repeat: no-repeat;
     background-size: cover;
 }
