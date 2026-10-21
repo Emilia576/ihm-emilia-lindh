@@ -5,6 +5,13 @@
     box-sizing: border-box;
 }
 
+@media (max-width: 47.99rem) {
+    .hero-portrait {
+        right: 1cm;
+    }
+}
+
+
 /* 2 · Varumärket som variabler */
 :root {
     --text: #1f2430;
@@ -12,21 +19,28 @@
     --yta-2: #f2ebe1;
     --kant: #ded5c6;
     --primar: #1d4e89;
-    --accent: #b0805a;
-    --knapptext: #ffffff;
+    --accent: #f3e8d7;
+    --knapptext: #56182b;
     --rubrik: #5c3d2e;
     --luft: 1rem;
     --radie: 12px;
+    --sans: "Lora", Georgia, serif;
+    --display: "Lora", Georgia, serif;
 }
 
 /* 3 · Grundstil */
 body {
     margin: 0;
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    font-family: var(--sans);
     font-size: 1.125rem;
     line-height: 1.6;
     color: var(--text);
     background: var(--yta);
+}
+
+.gtm-iframe {
+    display: none;
+    visibility: hidden;
 }
 
 h1,
@@ -37,11 +51,15 @@ h3 {
 }
 
 h1 {
+    font-family: var(--display);
+    font-weight: 400;
     font-size: 2rem;
     margin: 0;
 }
 
 h2 {
+    font-family: var(--display);
+    font-weight: 400;
     font-size: 1.75rem;
     margin-top: 0;
 }
@@ -58,6 +76,10 @@ a {
     color: var(--primar);
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 img {
     max-width: 100%;
     height: auto;
@@ -66,12 +88,64 @@ img {
 
 /* 4 · Sidhuvud och meny */
 .sidhuvud {
+    position: sticky;
+    top: 0;
+    z-index: 100;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
     gap: var(--luft);
     padding: calc(var(--luft) * 1.5);
-    background: var(--yta-2);
+    background: #5b1b2b;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--kant);
+    overflow: visible;
+    padding-bottom: 5.7rem;
+    margin-bottom: 1cm;
+    box-shadow: 0 1cm 0 #f3e8dc;
+}
+
+.header-remmsa {
+    position: absolute;
+    right: 0;
+    bottom: -1cm;
+    left: 0;
+    height: 1.5rem;
+    overflow: hidden;
+    color: #f3e8dc;
+    background: #874057;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    line-height: 1.5rem;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.header-remmsa span {
+    display: inline-block;
+    padding-left: 0;
+    animation: remsa 44s linear infinite;
+}
+
+.header-remmsa span::first-letter {
+    color: #ffffff;
+}
+
+@keyframes remsa {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .header-remmsa span { animation: none; }
+}
+
+.sidhuvud h1,
+.sidhuvud .roll,
+.sidhuvud nav a {
+    color: #f3e8dc;
 }
 
 .roll {
@@ -87,6 +161,24 @@ nav ul {
     padding: 0;
 }
 
+.sidhuvud nav {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.sidhuvud nav a {
+    display: inline-block;
+    padding: 0.25rem 0.35rem;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.sidhuvud nav a:hover {
+    color: #e4bdb2;
+    border-color: #e4bdb2;
+    transform: translateY(-1px);
+}
+
 nav a {
     color: var(--rubrik);
     font-weight: 600;
@@ -99,145 +191,383 @@ nav a:hover {
 
 /* 5 · Innehållsytan */
 main {
-    max-width: 70rem;
-    margin: 0 auto;
-    padding: 0 calc(var(--luft) * 1.5);
+    width: 100%;
 }
 
-section {
-    padding: calc(var(--luft) * 3) 0;
+main > section {
+    max-width: 70rem;
+    margin: 0 auto;
+    padding: calc(var(--luft) * 3) calc(var(--luft) * 1.5);
+}
+
+main > section.hero {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 /* Hero-sektion */
 .hero {
-    padding: calc(var(--luft) * 4) 0;
-    text-align: left;
+    position: relative;
+    display: grid;
+    min-height: calc(100vh - 82px);
+    min-height: calc(100dvh - 82px);
+    place-items: center;
+    overflow: hidden;
+    padding: 5rem 2rem;
+    color: #f7f1e9;
+    text-align: center;
+    background: #56182b;
+    isolation: isolate;
+}
+
+.hero::before,
+.hero::after {
+    position: absolute;
+    z-index: -1;
+    content: "";
+    border: 1px solid rgba(247, 241, 233, 0.15);
+    border-radius: 50%;
+}
+
+.hero::before {
+    width: min(68vw, 60rem);
+    aspect-ratio: 1;
+}
+
+.hero::after {
+    width: min(46vw, 41rem);
+    aspect-ratio: 1;
 }
 
 .hero-innehall {
-    max-width: 800px;
+    max-width: 60rem;
 }
 
 .hero-tagg {
-    display: inline-block;
-    background: var(--yta-2);
-    color: var(--accent);
-    border: 1px solid var(--kant);
-    font-size: 0.9rem;
-    font-weight: 700;
-    padding: 0.35rem 0.85rem;
-    border-radius: 20px;
-    margin-bottom: var(--luft);
+    margin: 0 0 1.75rem;
+    color: rgba(247, 241, 233, 0.8);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
 }
 
 .hero h2 {
-    font-size: 2.25rem;
-    margin-top: 0;
-    margin-bottom: calc(var(--luft) * 1.25);
-    line-height: 1.2;
+    margin: 0;
+    color: #f7f1e9;
+    font-size: clamp(3.7rem, 10vw, 9rem);
+    letter-spacing: -0.055em;
+    line-height: 0.83;
 }
 
-.hero p {
-    font-size: 1.2rem;
-    color: var(--text);
-    margin-bottom: calc(var(--luft) * 2);
+.hero-intro {
+    max-width: 29rem;
+    margin: 2.2rem auto 2.4rem;
+    color: rgba(247, 241, 233, 0.82);
+    font-size: 1rem;
 }
 
 .hero-knappar {
     display: flex;
+    justify-content: center;
     gap: var(--luft);
     flex-wrap: wrap;
 }
 
-/* Rörliga tunna linjer runt knapparna */
 .hero-knappar .knapp {
-    position: relative;
-    background: transparent;
-    color: var(--knapptext);
-    border: none;
-    overflow: hidden;
-    isolation: isolate;
-    padding: 0.75rem 1.35rem;
-    z-index: 1;
+    padding: 0.8rem 1.1rem;
+    color: #56182b;
+    background: #f7f1e9;
+    border-radius: 0;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
 }
 
 .hero-knappar .knapp:hover {
-    background: transparent;
-    color: var(--knapptext);
+    color: #f7f1e9;
+    background: #7a2941;
 }
 
-.hero-knappar .knapp::before {
-    content: "";
+.hero-knappar .knapp span {
+    display: inline-block;
+    margin-left: 1.35rem;
+    font-size: 1.1em;
+}
+
+.hero-sidnot {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 320%;
-    height: 320%;
-    transform: translate(-50%, -50%);
-    animation: roteraLinje 4s linear infinite;
-    z-index: -2;
-    background: conic-gradient(
-        from 0deg,
-        rgba(222, 213, 198, 0.4) 0deg,
-        rgba(222, 213, 198, 0.4) 60deg,
-        #ffffff 85deg,
-        #5c3d2e 105deg,
-        rgba(222, 213, 198, 0.4) 130deg,
-        rgba(222, 213, 198, 0.4) 240deg,
-        #ffffff 265deg,
-        #5c3d2e 285deg,
-        rgba(222, 213, 198, 0.4) 310deg
-    );
-}
-
-/* Skapa en fin fasförskjutning så att linjerna inte roterar helt identiskt */
-.hero-knappar .knapp:nth-child(2)::before {
-    animation-delay: -2s;
-}
-
-.hero-knappar .knapp::after {
-    content: "";
-    position: absolute;
-    inset: 1.5px;
-    background: var(--accent);
-    border-radius: calc(var(--radie) - 1.5px);
-    z-index: -1;
-    transition: background 0.2s ease;
-}
-
-.hero-knappar .knapp:hover::after {
-    background: #9c6e49;
-}
-
-/* Animation som rör linjen runt knappen */
-@keyframes roteraLinje {
-    0% {
-        transform: translate(-50%, -50%) rotate(0deg);
-    }
-    100% {
-        transform: translate(-50%, -50%) rotate(360deg);
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .hero-knappar .knapp::before {
-        animation: none;
-    }
+    right: 1.4rem;
+    bottom: 1.8rem;
+    color: rgba(247, 241, 233, 0.55);
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    writing-mode: vertical-rl;
 }
 
 /* Anpassning för större skärmar */
 @media (min-width: 48rem) {
     .hero {
-        padding: calc(var(--luft) * 6) 0;
+        padding: calc(var(--luft) * 5) calc(var(--luft) * 3);
     }
 
     .hero h2 {
-        font-size: 3rem;
+        font-size: clamp(5rem, 10vw, 9rem);
     }
 }
 
+@media (max-width: 47.99rem) {
+    .hero {
+        min-height: calc(100vh - 120px);
+        min-height: calc(100dvh - 120px);
+        padding: calc(var(--luft) * 2.5) calc(var(--luft) * 1);
+    }
+
+    .hero-innehall {
+        margin-left: 0;
+    }
+
+    .hero h2 {
+        font-size: clamp(3.4rem, 18vw, 5rem);
+    }
+
+}
+
+@media (min-width: 64rem) {
+    .hero-innehall {
+        width: min(39rem, 48vw);
+        margin-left: 0;
+        padding-top: 6rem;
+        transform: translateY(-4rem);
+    }
+
+    .hero-tagg {
+        font-size: clamp(2rem, 3.2vw, 3rem);
+        line-height: 1;
+    }
+
+    .hero h2 {
+        max-width: 34rem;
+        font-size: clamp(3rem, 4.2vw, 4.8rem);
+    }
+
+    .hero-intro {
+        max-width: 20rem;
+        font-size: 0.95rem;
+    }
+}
+
+/* Hero: stabil layout för alla skärmstorlekar */
+.hero {
+    min-height: clamp(42rem, 88vh, 50rem);
+}
+
+.hero-innehall {
+    max-width: 100%;
+}
+
+@media (min-width: 48rem) and (max-width: 63.99rem) {
+    .hero {
+        min-height: 44rem;
+        padding: 3.5rem 5vw 4rem;
+    }
+
+    .hero-innehall {
+        width: 54%;
+        padding-top: 6rem;
+        transform: translateY(-2rem);
+    }
+
+    .hero-tagg { font-size: clamp(1.8rem, 4vw, 2.5rem); }
+
+    .hero h2 {
+        max-width: 28rem;
+        font-size: clamp(2.6rem, 5.5vw, 4rem);
+    }
+
+    .hero-portrait {
+        top: 6rem;
+        right: 3vw;
+        width: 38vw;
+    }
+}
+
+@media (max-width: 47.99rem) {
+    .hero {
+        min-height: 48rem;
+        padding: 2rem 1.25rem 3rem;
+    }
+
+    .hero-gardinlinje {
+        top: 3.5rem;
+        left: 6%;
+        width: 88%;
+    }
+
+    .hero-innehall {
+        width: 100%;
+        padding: 6rem 0 0;
+        transform: none;
+    }
+
+    .hero-tagg {
+        max-width: 16rem;
+        font-size: clamp(1.8rem, 9vw, 2.6rem);
+        line-height: 1;
+    }
+
+    .hero h2 {
+        max-width: 21rem;
+        font-size: clamp(2.6rem, 12vw, 4rem);
+        line-height: 0.94;
+    }
+
+    .hero-intro {
+        max-width: 18rem;
+        margin: 1.5rem 0;
+        font-size: 0.95rem;
+    }
+
+    .hero-portrait {
+        top: auto;
+        right: 0.75rem;
+        bottom: 0;
+        width: 45vw;
+        height: 42%;
+        opacity: 0.3;
+        z-index: 1;
+    }
+
+    .hero-sidnot { display: none; }
+}
+
+/* Hero: stabil layout för alla skärmstorlekar */
+.hero {
+    min-height: clamp(42rem, 88vh, 50rem);
+}
+
+.hero-innehall {
+    max-width: 100%;
+}
+
+@media (min-width: 48rem) and (max-width: 63.99rem) {
+    .hero {
+        min-height: 44rem;
+        padding: 3.5rem 5vw 4rem;
+    }
+
+    .hero-innehall {
+        width: 54%;
+        padding-top: 6rem;
+        transform: translateY(-2rem);
+    }
+
+    .hero-tagg {
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
+    }
+
+    .hero h2 {
+        max-width: 28rem;
+        font-size: clamp(2.6rem, 5.5vw, 4rem);
+    }
+
+    .hero-portrait {
+        top: 6rem;
+        right: 3vw;
+        width: 38vw;
+    }
+}
+
+@media (max-width: 47.99rem) {
+    .hero {
+        min-height: 48rem;
+        padding: 2rem 1.25rem 3rem;
+    }
+
+    .hero-gardinlinje {
+        top: 3.5rem;
+        left: 6%;
+        width: 88%;
+    }
+
+    .hero-innehall {
+        width: 100%;
+        padding: 6rem 0 0;
+        transform: none;
+    }
+
+    .hero-tagg {
+        max-width: 16rem;
+        font-size: clamp(1.8rem, 9vw, 2.6rem);
+        line-height: 1;
+    }
+
+    .hero h2 {
+        max-width: 21rem;
+        font-size: clamp(2.6rem, 12vw, 4rem);
+        line-height: 0.94;
+    }
+
+    .hero-intro {
+        max-width: 18rem;
+        margin: 1.5rem 0;
+        font-size: 0.95rem;
+    }
+
+    .hero-portrait {
+        top: auto;
+        right: 0.75rem;
+        bottom: 0;
+        width: 45vw;
+        height: 42%;
+        opacity: 0.3;
+        z-index: 1;
+    }
+
+    .hero-sidnot {
+        display: none;
+    }
+}
+
+/* Desktop-layout */
+@media (min-width: 64rem) {
+    .sidhuvud {
+        padding: 1.25rem clamp(2rem, 6vw, 6rem);
+    }
+
+    .sidhuvud nav ul {
+        gap: clamp(1rem, 2.5vw, 2.25rem);
+        flex-wrap: nowrap;
+    }
+
+    .hero {
+        min-height: 46rem;
+        padding: 5rem clamp(3rem, 8vw, 9rem) 6rem;
+    }
+
+    .hero-innehall {
+        width: min(52rem, 64vw);
+    }
+
+    .hero h2 {
+        font-size: clamp(3rem, 4.7vw, 5rem);
+    }
+
+    main > section:not(.hero) {
+        padding: 6rem clamp(3rem, 8vw, 9rem);
+    }
+
+    .rutnat {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    #projekt .rutnat {
+        grid-template-columns: minmax(0, 1fr);
+        max-width: 62rem;
+    }
+}
 
 /* Om mig - Bild i nedre högra hörnet */
 .om-innehall {
@@ -294,7 +624,7 @@ button,
     padding: 0.75rem 1.25rem;
     color: var(--knapptext);
     background: var(--accent);
-    border: none;
+    border: 1px solid #56182b;
     border-radius: var(--radie);
     font-weight: 700;
     text-decoration: none;
@@ -304,8 +634,8 @@ button,
 
 button:hover,
 .knapp:hover {
-    background: #9c6e49;
-    color: var(--knapptext);
+    background: #e8d8c3;
+    color: #56182b;
     text-decoration: none;
 }
 
@@ -334,11 +664,19 @@ footer p {
 
 /* 8 · Större skärmar */
 @media (min-width: 48rem) {
+    .hero-gardinlinje {
+        display: block;
+    }
+
     .sidhuvud {
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
         padding: calc(var(--luft) * 1.5) calc(var(--luft) * 3);
+    }
+
+    .sidhuvud nav {
+        margin-left: auto;
     }
 
     h1 {
@@ -358,53 +696,1006 @@ body.morkt {
     --kant: #343a48;
     --primar: #8ab4f8;
     --rubrik: #d7b9a5;
-    --accent: #a57853;
-    --knapptext: #ffffff;
+    --accent: #f3e8d7;
+    --knapptext: #56182b;
 }
 
-body.morkt .hero-knappar .knapp::before {
-    background: conic-gradient(
-        from 0deg,
-        rgba(52, 58, 72, 0.5) 0deg,
-        rgba(52, 58, 72, 0.5) 60deg,
-        #ffffff 85deg,
-        var(--rubrik) 105deg,
-        rgba(52, 58, 72, 0.5) 130deg,
-        rgba(52, 58, 72, 0.5) 240deg,
-        #ffffff 265deg,
-        var(--rubrik) 285deg,
-        rgba(52, 58, 72, 0.5) 310deg
-    );
+body.morkt .sidhuvud {
+    background: rgba(31, 36, 48, 0.94);
+    border-color: var(--kant);
 }
 
 /* 10 · Kompetenser */
 .kompetenser-lista {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.6rem;
+    display: block;
     list-style: none;
     padding: 0;
     margin: var(--luft) 0;
-    max-width: 550px;
+    max-width: none;
 }
 
 .kompetenser-lista li {
-    background: var(--yta-2);
+    width: 100%;
+    background: transparent;
     color: var(--text);
-    border: 1px solid var(--kant);
-    padding: 0.5rem 0.75rem;
-    border-radius: calc(var(--radie) / 2);
+    border: 0;
+    border-top: 1px solid var(--kant);
+    padding: 0.9rem 0;
+    border-radius: 0;
     font-size: 0.95rem;
     font-weight: 500;
-    text-align: center;
+    text-align: left;
     display: flex;
     align-items: center;
-    justify-content: center;
-    min-height: 40px;
+    justify-content: flex-start;
+    min-height: 48px;
+}
+
+.kompetenser-lista li:last-child {
+    border-bottom: 1px solid var(--kant);
+}
+
+.kompetenser-lista li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2rem;
+}
+
+.kompetenser-lista strong {
+    color: #5b1b2b;
+    font-size: 1.25rem;
+}
+
+.kompetenser-lista small {
+    color: var(--text);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.45;
+    display: block;
+    max-height: 0;
+    margin-top: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.35s ease, margin-top 0.35s ease, opacity 0.35s ease;
+}
+
+.kompetens-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+    border: 0;
+    color: inherit;
+    background: transparent;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.kompetens-toggle span {
+    color: #5b1b2b;
+    font-size: 1.5rem;
+    font-weight: 300;
+    line-height: 1;
+}
+
+.kompetenser-lista li.is-open small {
+    max-height: 8rem;
+    margin-top: 0.45rem;
+    opacity: 1;
 }
 
 @media (max-width: 650px) {
     .kompetenser-lista {
         grid-template-columns: 1fr;
+    }
+}
+
+/* Editorial portfolio layout */
+.hero {
+    min-height: min(47rem, calc(100dvh - 82px));
+    display: block;
+    padding: 2rem clamp(1.25rem, 4vw, 4rem) 3rem;
+    color: #35141d;
+    text-align: left;
+    background: #f3e8dc;
+}
+
+.hero::before,
+.hero::after {
+    border-color: rgba(91, 27, 43, 0.25);
+    z-index: 0;
+}
+
+.hero::before {
+    width: min(40vw, 34rem);
+    right: 8%;
+    top: 15%;
+}
+
+.hero::after {
+    display: none;
+}
+
+.hero-innehall {
+    position: relative;
+    z-index: 2;
+    width: min(42rem, 55vw);
+    max-width: none;
+    margin-left: 0;
+    transform: translate(-7rem, 0.35rem);
+    padding-left: 1.5rem;
+    padding-top: 6rem;
+}
+
+.hero-kanttext {
+    position: absolute;
+    z-index: 3;
+    top: 1.5rem;
+    color: #5b1b2b;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.hero-kanttext-vänster { left: clamp(1.25rem, 4vw, 4rem); }
+.hero-kanttext-höger {
+    left: 50%;
+    right: auto;
+    text-align: center;
+    transform: translateX(-50%);
+}
+
+.hero-kanttext-höger::before {
+    display: none;
+}
+
+.hero-kanttext-vänster::after,
+.hero-kanttext-höger::before {
+    display: inline-block;
+    width: clamp(5rem, 20vw, 16rem);
+    height: 1px;
+    margin: 0 1rem 0.2rem;
+    content: "";
+    background: rgba(91, 27, 43, 0.35);
+}
+
+.hero-gardinlinje {
+    position: absolute;
+    z-index: 2;
+    top: 3.3rem;
+    left: 8%;
+    width: 84%;
+    height: 0;
+    border-top: 1px solid rgba(91, 27, 43, 0.65);
+}
+
+.hero-gardinlinje {
+    display: none;
+}
+
+.hero-gardinlinje::before,
+.hero-gardinlinje::after {
+    position: absolute;
+    top: -0.24rem;
+    width: 0.42rem;
+    height: 0.42rem;
+    content: "";
+    border-radius: 50%;
+    background: #5b1b2b;
+}
+
+.hero-gardinlinje::before {
+    left: 0;
+}
+
+.hero-gardinlinje::after {
+    right: 0;
+}
+
+.hero-gardinlinje span {
+    position: absolute;
+    top: -0.85rem;
+    left: 50%;
+    width: 7rem;
+    height: 1.7rem;
+    background: #f3e8dc;
+    transform: translateX(-50%);
+}
+
+.hero-gardinlinje span::before,
+.hero-gardinlinje span::after {
+    position: absolute;
+    content: "";
+}
+
+.hero-gardinlinje span::before {
+    top: 0.05rem;
+    left: 50%;
+    width: 100%;
+    height: auto;
+    color: #5b1b2b;
+    content: "❀  ✧  ❀";
+    font-family: Georgia, serif;
+    font-size: 1.35rem;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    text-align: center;
+    transform: translateX(-50%);
+}
+
+.hero-gardinlinje span::after {
+    display: none;
+}
+
+.hero-portfolio {
+    position: absolute;
+    top: 0;
+    left: -0.08em;
+    margin: 0;
+    color: #421823;
+    font-size: clamp(4rem, 12vw, 10rem);
+    font-weight: 400;
+    letter-spacing: -0.095em;
+    line-height: 0.8;
+}
+
+.hero-tagg {
+    margin-bottom: 1.25rem;
+    color: #5b1b2b;
+    font-family: var(--display);
+    font-size: clamp(2.5rem, 5.5vw, 4rem);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+
+.hero h2 {
+    max-width: 25rem;
+    color: #421823;
+    font-size: clamp(2.3rem, 4.5vw, 3.8rem);
+    font-weight: 400;
+    letter-spacing: -0.06em;
+    line-height: 0.95;
+}
+
+.hero-underrad {
+    font-size: 1em;
+}
+
+.hero-intro {
+    max-width: 22rem;
+    margin: 1.5rem 0 2rem;
+    color: #4b3435;
+    font-size: 1.1rem;
+}
+
+.hero-knappar { justify-content: flex-start; }
+
+.hero-portrait {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(44vw, 38rem);
+    height: 100%;
+    overflow: hidden;
+    border: 0;
+    border-radius: 0;
+    background-color: #3a0d1b;
+    background-image: url("img/emilia-professionell.png");
+    background-position: center;
+    background-size: cover;
+}
+
+.hero-portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 18%;
+    mix-blend-mode: normal;
+}
+
+body > header,
+main > section:not(.hero),
+footer {
+    position: relative;
+    z-index: 2;
+}
+
+main > section:not(.hero) {
+    border-top: 1px solid rgba(91, 27, 43, 0.2);
+}
+
+main > section:not(.hero) h2 {
+    color: #5b1b2b;
+    font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+    letter-spacing: -0.05em;
+}
+
+main > section:not(.hero) h2::after {
+    display: none;
+}
+
+#projekt,
+#kontakt {
+    max-width: none;
+    background: #5b1b2b;
+    color: #f3e8dc;
+}
+
+#projekt h2,
+#kontakt h2,
+#projekt p,
+#kontakt p,
+#kontakt a { color: #f3e8dc; }
+
+#om,
+#tjanster,
+#kompetenser {
+    background: #faf6f0;
+}
+
+footer {
+    color: #5b1b2b;
+    background: #f3e8dc;
+}
+
+#projekt .kort {
+    position: relative;
+    overflow: hidden;
+    background: transparent;
+    border-color: rgba(243, 232, 220, 0.3);
+    padding: clamp(1.5rem, 4vw, 4rem);
+    background-image: linear-gradient(135deg, rgba(255, 250, 244, 0.08), transparent 45%);
+}
+
+#projekt .kort h3 {
+    position: relative;
+    margin: 0 0 1rem;
+    padding: 0 0 1rem;
+    color: #e4bdb2;
+    font-size: clamp(1.25rem, 2.4vw, 2.1rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    border-bottom: 1px solid rgba(243, 232, 220, 0.5);
+    transition: transform 0.25s ease, color 0.25s ease;
+}
+
+#projekt .kort h3::before {
+    display: none;
+}
+
+#projekt .kort h3:nth-of-type(2) {
+    color: #e4bdb2;
+}
+
+#projekt .kort h3:hover {
+    transform: translateX(0.4rem);
+}
+
+#projekt .kort p {
+    color: #fffaf4;
+    max-width: 42rem;
+    font-size: 1rem;
+}
+
+#projekt .kort h3:not(:first-child) {
+    margin-top: 2.25rem;
+}
+
+#tjanster .rutnat {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+    border-top: 0;
+}
+
+#tjanster {
+    border-top: 2px solid rgba(91, 27, 43, 0.55);
+}
+
+#tjanster .kort {
+    position: relative;
+    border: 0;
+    border-bottom: 0;
+    border-radius: 0;
+    background: transparent;
+    padding: 3rem 2.5rem;
+}
+
+#tjanster .kort::before {
+    position: absolute;
+    inset: 1.25rem;
+    z-index: 0;
+    display: block;
+    content: "";
+    background: #eee2dc;
+}
+
+#tjanster .kort h3,
+#tjanster .kort p {
+    position: relative;
+    z-index: 1;
+}
+
+#tjanster .kort:nth-child(odd) {
+    border-right: 1px solid var(--kant);
+    padding-right: clamp(1.25rem, 4vw, 4rem);
+}
+
+#tjanster .kort:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--kant);
+}
+
+#tjanster .kort:nth-child(even) {
+    padding-left: clamp(1.25rem, 4vw, 4rem);
+}
+
+#tjanster .kort h3 {
+    margin: 0 0 0.75rem;
+    color: #5b1b2b;
+    font-size: clamp(1.25rem, 2.2vw, 1.8rem);
+}
+
+#tjanster .kort p {
+    margin: 0;
+    color: var(--text);
+    font-size: 0.98rem;
+}
+
+@media (max-width: 47.99rem) {
+    #tjanster .rutnat {
+        grid-template-columns: 1fr;
+    }
+
+    #tjanster .kort:nth-child(odd),
+    #tjanster .kort:nth-child(even) {
+        border-right: 0;
+        border-bottom: 0;
+        padding: 2rem 1.5rem;
+    }
+}
+
+.hero-portrait {
+    top: 7.15rem;
+    right: clamp(1.5rem, 8vw, 8rem);
+    bottom: auto;
+    width: min(30vw, 26rem);
+    height: 75%;
+    overflow: hidden;
+    border: 0;
+    border-radius: 0;
+    background: #5b1b2b;
+    background-image: none;
+}
+
+.hero::before {
+    display: none;
+}
+
+.hero-portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 45%;
+    transform: scale(1.25);
+}
+
+@media (max-width: 47.99rem) {
+    .hero { min-height: 48rem; padding: 2rem 1.25rem 3rem; }
+    .hero-portrait { top: auto; right: 0.75rem; bottom: 0; width: 45vw; height: 42%; opacity: 0.3; }
+    .hero-innehall { width: 100%; margin-left: 0; transform: none; padding: 6rem 0 0; }
+    .hero-portfolio { font-size: clamp(3.2rem, 17vw, 6rem); }
+    .hero-kanttext-höger { display: none; }
+}
+
+@media (min-width: 64rem) {
+    .hero-innehall {
+        width: min(39rem, 48vw);
+        padding-top: 6rem;
+    }
+
+    .hero-tagg {
+        font-size: clamp(2rem, 3.2vw, 3rem);
+        line-height: 1;
+    }
+
+    .hero h2 {
+        max-width: 34rem;
+        font-size: clamp(3rem, 4.2vw, 4.8rem);
+    }
+
+    .hero-intro {
+        max-width: 20rem;
+        font-size: 0.95rem;
+    }
+}
+
+/* Slutlig responsiv finjustering */
+html,
+body {
+    overflow-x: hidden;
+}
+
+@media (max-width: 47.99rem) {
+    .sidhuvud {
+        gap: 0.7rem;
+        padding: 1rem 1rem 5.7rem;
+    }
+
+    .sidhuvud nav ul {
+        justify-content: center;
+        gap: 0.55rem 0.85rem;
+    }
+
+    .sidhuvud nav a {
+        font-size: 0.78rem;
+    }
+
+    .header-remmsa {
+        height: 1.35rem;
+        font-size: 0.58rem;
+        line-height: 1.35rem;
+    }
+
+    .hero {
+        min-height: 43rem;
+        padding: 2rem 1.25rem 3rem;
+    }
+
+    .hero-innehall {
+        width: 100%;
+        padding: 5.5rem 0 0;
+    }
+
+    .hero-tagg {
+        max-width: 17rem;
+        font-size: clamp(1.7rem, 8vw, 2.35rem);
+    }
+
+    .hero h2 {
+        max-width: 19rem;
+        font-size: clamp(2.45rem, 11.5vw, 3.6rem);
+    }
+
+    .hero-intro {
+        max-width: 19rem;
+        font-size: 0.92rem;
+    }
+
+    .hero-knappar {
+        justify-content: flex-start;
+    }
+
+    .hero-portrait {
+        right: 0.75rem;
+        bottom: 0;
+        width: min(48vw, 14rem);
+        height: 40%;
+        opacity: 0.26;
+    }
+
+    main > section:not(.hero),
+    footer {
+        padding-right: 1.25rem;
+        padding-left: 1.25rem;
+    }
+}
+
+@media (min-width: 48rem) and (max-width: 63.99rem) {
+    .sidhuvud {
+        padding-right: 2rem;
+        padding-left: 2rem;
+    }
+
+    .hero {
+        min-height: 42rem;
+        padding: 4.5rem 5vw 5rem;
+    }
+
+    .hero-innehall {
+        width: 52%;
+        padding-top: 5.5rem;
+        transform: translateY(-1rem);
+    }
+
+    .hero h2 {
+        font-size: clamp(2.7rem, 5.2vw, 4.2rem);
+    }
+
+    .hero-portrait {
+        top: 6rem;
+        right: 4vw;
+        width: min(36vw, 22rem);
+        height: 72%;
+    }
+}
+
+@media (min-width: 48rem) {
+    .hero-portrait {
+        display: block;
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .hero-innehall {
+        width: min(39rem, 48vw);
+        margin-left: 0;
+        padding-left: 0;
+        padding-top: 6rem;
+        transform: translate(3cm, 1cm);
+    }
+
+    .hero h2 {
+        font-size: clamp(2.5rem, 3.8vw, 4rem);
+    }
+
+    .hero h2,
+    .hero-intro {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 47.99rem) {
+    .hero-innehall {
+        width: calc(100% - 1cm);
+        padding: 5.5rem 0 0 1cm;
+    }
+
+    .hero-tagg {
+        font-size: clamp(2.2rem, 10vw, 3.4rem);
+        font-weight: 400;
+    }
+
+    .hero h2 {
+        font-size: clamp(2.2rem, 10vw, 3.2rem);
+    }
+
+    .hero-portrait {
+        right: 1cm;
+        top: 5.5rem;
+        bottom: auto;
+        width: min(44vw, 14rem);
+        height: 58%;
+        opacity: 0.9;
+    }
+
+    .hero-portrait img {
+        object-position: center 30%;
+        transform: scale(1.08);
+    }
+}
+
+@media (min-width: 48rem) {
+    .hero-tagg {
+        font-size: clamp(3rem, 5vw, 4.8rem);
+        font-weight: 400;
+    }
+}
+
+/* Visa mer av bildens övre del på desktop så att huvudet inte beskärs. */
+@media (min-width: 48rem) {
+    .hero-portrait img {
+        object-position: center 12%;
+        transform: scale(1.05);
+    }
+}
+
+/* Sammanhållet mörkt läge */
+body.morkt {
+    color: #f3e8dc;
+    background: #17131a;
+}
+
+body.morkt .sidhuvud {
+    background: #24131d;
+    border-color: rgba(243, 232, 220, 0.25);
+    box-shadow: 0 1cm 0 #321827;
+}
+
+body.morkt .sidhuvud h1,
+body.morkt .sidhuvud .roll,
+body.morkt .sidhuvud nav a {
+    color: #f3e8dc;
+}
+
+body.morkt .header-remmsa {
+    color: #fffaf4;
+    background: #874057;
+}
+
+body.morkt .hero {
+    color: #f3e8dc;
+    background: #321827;
+}
+
+body.morkt .hero-tagg,
+body.morkt .hero h2,
+body.morkt .hero-intro {
+    color: #f3e8dc;
+}
+
+body.morkt .hero-knappar .knapp,
+body.morkt .knapp,
+body.morkt button {
+    color: #321827;
+    background: #f3e8dc;
+    border-color: #f3e8dc;
+}
+
+body.morkt .hero-knappar .knapp:hover,
+body.morkt .knapp:hover,
+body.morkt button:hover {
+    color: #fffaf4;
+    background: #874057;
+}
+
+body.morkt #om,
+body.morkt #tjanster,
+body.morkt #kompetenser {
+    color: #f3e8dc;
+    background: #17131a;
+    border-color: rgba(243, 232, 220, 0.28);
+}
+
+body.morkt #om h2,
+body.morkt #tjanster h2,
+body.morkt #kompetenser h2,
+body.morkt #tjanster .kort h3,
+body.morkt .kompetenser-lista strong {
+    color: #e4bdb2;
+}
+
+body.morkt #tjanster .kort::before {
+    background: #2a1b25;
+}
+
+body.morkt #tjanster {
+    border-top-color: rgba(228, 189, 178, 0.55);
+}
+
+body.morkt .kompetenser-lista li {
+    border-color: rgba(243, 232, 220, 0.28);
+    background: #24131d;
+}
+
+body.morkt .kompetenser-lista small,
+body.morkt #om p,
+body.morkt #tjanster .kort p {
+    color: #f3e8dc;
+}
+
+body.morkt #projekt,
+body.morkt #kontakt {
+    color: #f3e8dc;
+    background: #321827;
+}
+
+body.morkt #projekt h2,
+body.morkt #kontakt h2,
+body.morkt #projekt p,
+body.morkt #kontakt p,
+body.morkt #kontakt a {
+    color: #f3e8dc;
+}
+
+body.morkt footer {
+    color: #f3e8dc;
+    background: #24131d;
+}
+
+body:not(.morkt),
+body:not(.morkt) #om,
+body:not(.morkt) #tjanster,
+body:not(.morkt) #kompetenser,
+body:not(.morkt) footer {
+    background: #f3e8dc;
+}
+
+body:not(.morkt) #om {
+    color: #f3e8dc;
+    background: #5b1b2b;
+}
+
+body:not(.morkt) #om h2,
+body:not(.morkt) #om p {
+    color: #f3e8dc;
+}
+
+#om {
+    width: calc(100% - 2cm);
+    max-width: none;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+}
+
+#om p {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#om h2 {
+    transform: translateX(-1.2cm);
+}
+
+.om-bildram {
+    display: grid;
+    place-items: center;
+    width: min(100%, 28rem);
+    height: 16rem;
+    margin: 0 auto 2rem;
+    color: rgba(243, 232, 220, 0.75);
+    border: 0;
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transform: translateY(-2cm);
+}
+
+.om-bildram img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+@media (min-width: 48rem) {
+    #om {
+        display: grid;
+        grid-template-columns: minmax(14rem, 0.8fr) minmax(0, 1.4fr);
+        column-gap: clamp(2rem, 5vw, 5rem);
+        align-items: center;
+        text-align: left;
+    }
+
+    #om h2 {
+        grid-column: 1 / -1;
+        width: 100%;
+        text-align: center;
+    }
+
+    #om .om-bildram {
+        grid-column: 1;
+        grid-row: 2 / span 2;
+        width: 100%;
+        margin: 0;
+    }
+
+    #om p {
+        grid-column: 2;
+        margin-left: 0;
+    }
+}
+
+/* Sista visuella finjusteringar */
+main > section:not(.hero) {
+    scroll-margin-top: 6rem;
+    padding-block: clamp(2.8rem, 5vw, 4.5rem);
+}
+
+#kontakt .kontakt-text {
+    max-width: 42rem;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#kontakt .kontakt-text p {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media (max-width: 47.99rem) {
+    .sidhuvud nav {
+        width: 100%;
+    }
+
+    .sidhuvud nav ul {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .sidhuvud nav a {
+        font-size: 0.76rem;
+    }
+
+    main > section:not(.hero) {
+        padding-block: 2.5rem;
+    }
+}
+
+@media (max-width: 47.99rem) {
+    .hero-innehall {
+        width: calc(100% - 1cm);
+        padding: 5.5rem 0 0 1cm;
+    }
+
+    .hero-portrait {
+        right: 1cm;
+        top: 5.5rem;
+        bottom: auto;
+        width: min(44vw, 14rem);
+        height: 58%;
+    }
+}
+
+/* Hero-bilden som bakgrund och namnrad längst ned */
+.hero-portrait {
+    display: none;
+}
+
+body:not(.morkt) .hero {
+    background-color: #f3e8dc;
+    background-image: linear-gradient(rgba(243, 232, 220, 0.62), rgba(243, 232, 220, 0.62)), url("img/emilia-professionell.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.hero .hero-tagg {
+    position: absolute;
+    z-index: 3;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    margin: 0;
+    color: #5b1b2b;
+    font-size: clamp(3.8rem, 10vw, 10rem);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    line-height: 0.95;
+    text-align: center;
+    text-transform: none;
+    white-space: nowrap;
+}
+
+body.morkt .hero {
+    background-image: linear-gradient(rgba(50, 24, 39, 0.62), rgba(50, 24, 39, 0.62)), url("img/emilia-professionell.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+body.morkt .hero .hero-tagg {
+    color: #f3e8dc;
+}
+
+@media (max-width: 47.99rem) {
+    .hero .hero-tagg {
+        right: 0.75rem;
+        bottom: 1rem;
+        left: 0.75rem;
+        font-size: clamp(2.8rem, 14vw, 5rem);
+    }
+}
+
+.hero-innehall {
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+}
+
+.hero-intro {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.hero-knappar {
+    justify-content: center;
+}
+
+@media (min-width: 48rem) {
+    .hero-innehall {
+        transform: translateY(1cm);
+    }
+}
+
+@media (max-width: 47.99rem) {
+    .hero-innehall {
+        width: 100%;
+        padding-left: 0;
+        transform: none;
     }
 }
