@@ -798,12 +798,13 @@ body.morkt .sidhuvud {
 .hero-innehall {
     position: relative;
     z-index: 2;
-    width: min(42rem, 55vw);
-    max-width: none;
+    max-width: 46rem;
     margin-left: 0;
-    transform: translate(-7rem, 0.35rem);
-    padding-left: 1.5rem;
-    padding-top: 6rem;
+    margin-right: auto;
+    padding-left: 0;
+    padding-top: 2rem;
+    transform: none;
+    text-align: left;
 }
 
 .hero-kanttext {
@@ -920,12 +921,15 @@ body.morkt .sidhuvud {
 }
 
 .hero-tagg {
-    margin-bottom: 1.25rem;
+    margin: 0 0 0.85rem;
     color: #5b1b2b;
     font-family: var(--display);
-    font-size: clamp(2.5rem, 5.5vw, 4rem);
-    font-weight: 700;
-    letter-spacing: 0.08em;
+    font-size: clamp(1.35rem, 2.5vw, 2rem);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: none;
+    line-height: 1.2;
+    text-align: left;
 }
 
 .hero h2 {
@@ -1568,21 +1572,16 @@ body:not(.morkt) .hero {
     background-image: none;
 }
 
-.hero .hero-tagg {
-    position: absolute;
-    z-index: 3;
-    right: 1.5rem;
-    bottom: 1.5rem;
-    left: 1.5rem;
-    margin: 0;
+.hero-tagg {
+    margin: 0 0 0.85rem;
     color: #5b1b2b;
-    font-size: clamp(3.8rem, 10vw, 10rem);
-    font-weight: 400;
-    letter-spacing: 0.04em;
-    line-height: 0.95;
-    text-align: center;
+    font-family: var(--display);
+    font-size: clamp(1.35rem, 2.5vw, 2rem);
+    font-weight: 600;
+    letter-spacing: 0.02em;
     text-transform: none;
-    white-space: nowrap;
+    line-height: 1.2;
+    text-align: left;
 }
 
 body.morkt .hero {
@@ -1590,37 +1589,36 @@ body.morkt .hero {
     background-image: none;
 }
 
-body.morkt .hero .hero-tagg {
+body.morkt .hero-tagg {
     color: #f3e8dc;
 }
 
-@media (max-width: 47.99rem) {
-    .hero .hero-tagg {
-        right: 0.75rem;
-        bottom: 1rem;
-        left: 0.75rem;
-        font-size: clamp(2.8rem, 14vw, 5rem);
-    }
-}
-
 .hero-innehall {
+    max-width: 46rem;
+    margin-left: 0;
     margin-right: auto;
-    margin-left: auto;
-    text-align: center;
+    text-align: left;
+    transform: none;
 }
 
 .hero-intro {
+    max-width: 32rem;
+    margin-left: 0;
     margin-right: auto;
-    margin-left: auto;
+    margin-bottom: 2rem;
+    text-align: left;
 }
 
 .hero-knappar {
-    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: flex-start;
 }
 
 @media (min-width: 48rem) {
     .hero-innehall {
-        transform: translateY(1cm);
+        transform: none;
     }
 }
 
@@ -1629,5 +1627,10 @@ body.morkt .hero .hero-tagg {
         width: 100%;
         padding-left: 0;
         transform: none;
+        text-align: left;
+    }
+
+    .hero-tagg {
+        font-size: 1.35rem;
     }
 }
