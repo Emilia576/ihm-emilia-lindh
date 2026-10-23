@@ -92,21 +92,37 @@ img {
     top: 0;
     z-index: 100;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
-    gap: var(--luft);
-    padding: calc(var(--luft) * 1.5);
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.85rem clamp(1.25rem, 4vw, 3rem);
     background: #5b1b2b;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--kant);
 }
 
+.sidhuvud-logo,
 .sidhuvud h1,
 .sidhuvud .roll,
 .sidhuvud nav a {
     color: #f3e8dc;
+}
+
+.sidhuvud-logo {
+    font-family: var(--sans);
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    padding: 0.25rem 0.35rem;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.sidhuvud-logo:hover {
+    color: #e4bdb2;
+    transform: translateY(-1px);
 }
 
 .roll {
@@ -1183,8 +1199,19 @@ body {
 
 @media (max-width: 47.99rem) {
     .sidhuvud {
-        gap: 0.7rem;
-        padding: 1rem 1rem 5.7rem;
+        flex-wrap: wrap;
+        gap: 0.5rem 1rem;
+        padding: 0.75rem 1rem;
+    }
+
+    .sidhuvud-logo {
+        font-size: 0.85rem;
+    }
+
+    .sidhuvud nav {
+        order: 3;
+        width: 100%;
+        margin: 0;
     }
 
     .sidhuvud nav ul {
@@ -1349,9 +1376,9 @@ body.morkt {
 body.morkt .sidhuvud {
     background: #24131d;
     border-color: rgba(243, 232, 220, 0.25);
-    box-shadow: 0 1cm 0 #321827;
 }
 
+body.morkt .sidhuvud-logo,
 body.morkt .sidhuvud h1,
 body.morkt .sidhuvud .roll,
 body.morkt .sidhuvud nav a {
@@ -1458,68 +1485,26 @@ body:not(.morkt) #om p {
 }
 
 #om {
-    width: calc(100% - 2cm);
-    max-width: none;
+    width: 100%;
+    max-width: 50rem;
     margin-right: auto;
     margin-left: auto;
     text-align: center;
 }
 
+#om h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    transform: none;
+}
+
 #om p {
+    max-width: 42rem;
     margin-right: auto;
     margin-left: auto;
-}
-
-#om h2 {
-    transform: translateX(-1.2cm);
-}
-
-.om-bildram {
-    display: grid;
-    place-items: center;
-    width: min(100%, 28rem);
-    height: 16rem;
-    margin: 0 auto 2rem;
-    color: rgba(243, 232, 220, 0.75);
-    border: 0;
-    font-size: 0.9rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    transform: translateY(-2cm);
-}
-
-.om-bildram img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-@media (min-width: 48rem) {
-    #om {
-        display: grid;
-        grid-template-columns: minmax(14rem, 0.8fr) minmax(0, 1.4fr);
-        column-gap: clamp(2rem, 5vw, 5rem);
-        align-items: center;
-        text-align: left;
-    }
-
-    #om h2 {
-        grid-column: 1 / -1;
-        width: 100%;
-        text-align: center;
-    }
-
-    #om .om-bildram {
-        grid-column: 1;
-        grid-row: 2 / span 2;
-        width: 100%;
-        margin: 0;
-    }
-
-    #om p {
-        grid-column: 2;
-        margin-left: 0;
-    }
+    margin-bottom: 1.25rem;
+    text-align: center;
+    line-height: 1.8;
 }
 
 /* Sista visuella finjusteringar */
